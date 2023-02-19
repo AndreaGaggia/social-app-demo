@@ -1,0 +1,36 @@
+data_api_endpoint: https://eu-central-1.aws.data.mongodb-api.com/app/data-vvslj/endpoint/data/v1
+
+api_key: Dps7WpJyCzN3HorQSjR0W92XiJpsrx8LWOPvHcQXGcfnR0IIIIwklst7FppXdd1I
+
+
+
+NODE SNIPPET
+var axios = require('axios');
+var data = JSON.stringify({
+    "collection": "<COLLECTION_NAME>",
+    "database": "<DATABASE_NAME>",
+    "dataSource": "learningMongo",
+    "projection": {
+        "_id": 1
+    }
+});
+            
+var config = {
+    method: 'post',
+    url: 'https://eu-central-1.aws.data.mongodb-api.com/app/data-vvslj/endpoint/data/v1/action/findOne',
+    headers: {
+      'Content-Type': 'application/json',
+      'Access-Control-Request-Headers': '*',
+      'api-key': 'Dps7WpJyCzN3HorQSjR0W92XiJpsrx8LWOPvHcQXGcfnR0IIIIwklst7FppXdd1I',
+      'Accept': 'application/ejson'
+    },
+    data: data
+};
+            
+axios(config)
+    .then(function (response) {
+        console.log(JSON.stringify(response.data));
+    })
+    .catch(function (error) {
+        console.log(error);
+    });
